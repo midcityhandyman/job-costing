@@ -35,6 +35,7 @@ METHOD_NOTES = {
     "complete": "trade reported 100% complete, forecast is actual cost",
     "earned-value": "actual cost divided by reported percent complete",
     "early": "too early to extrapolate, remaining work held at estimate",
+    "no-cost": "progress reported but no cost booked yet, held at estimate",
     "no-progress": "no progress reported, greater of estimate and actual",
 }
 
@@ -212,6 +213,10 @@ def forecast_trade(
         return actual, "final"
     if pct is None:
         return max(estimate, actual), "no-progress"
+    if actual <= 0 and estimate > 0:
+        # Work is reported done but nothing is booked (a sub has not invoiced, timesheets
+        # are late). Dividing zero cost by progress would forecast the trade as free.
+        return estimate, "no-cost"
     if pct >= 1:
         return actual, "complete"
     if pct < min_progress:
@@ -374,7 +379,8 @@ def _classify(job: JobCost, settings: Settings) -> None:
         if trade.estimate == 0:
             detail = f"${trade.variance:,.0f} of cost with no estimate line"
         else:
-            detail = f"forecast {trade.variance_pct * 100:.0f}% over estimate (+${trade.variance:,.0f})"
+            what = "final cost" if job.final else "forecast"
+            detail = f"{what} {trade.variance_pct * 100:.0f}% over estimate (+${trade.variance:,.0f})"
         reasons.append(f"{trade.trade.title()}: {detail}.")
     job.reasons = reasons
 

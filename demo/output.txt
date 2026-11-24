@@ -42,8 +42,8 @@ $ python -m jobcost flags --data data/sample
 
 [BELOW] J-105 Sample Rental Turnover: projected 27.1% vs target 35% (estimated 37.0%, drift -9.9 pts)
     - Final margin 27.1% is below the 35.0% target by 7.9 points.
-    - Paint: forecast 21% over estimate (+$936).
-    - Flooring: forecast 14% over estimate (+$824).
+    - Paint: final cost 21% over estimate (+$936).
+    - Flooring: final cost 14% over estimate (+$824).
 
 [TRENDING] J-103 Sample Basement Finish: projected 36.8% vs target 35% (estimated 40.0%, drift -3.1 pts)
     - Projected margin 36.8% is still above the 35.0% target but is moving -0.7 points per 10% of progress; on that trend the job finishes near 34.2%.
@@ -187,8 +187,8 @@ $ python -m jobcost flags --data data/sample --fail-on-flag --json
     "status": "BELOW",
     "reasons": [
       "Final margin 27.1% is below the 35.0% target by 7.9 points.",
-      "Paint: forecast 21% over estimate (+$936).",
-      "Flooring: forecast 14% over estimate (+$824)."
+      "Paint: final cost 21% over estimate (+$936).",
+      "Flooring: final cost 14% over estimate (+$824)."
     ]
   },
   {

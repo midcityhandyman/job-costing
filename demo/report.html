@@ -110,7 +110,7 @@ footer { color:var(--muted); font-size:13px; margin-top:32px; }
       <th>Var %</th><th>Hours est / act</th><th class="l">Method</th></tr>
     <tr><td>Paint</td><td>100%</td><td>$4,450</td><td>$5,386</td><td>$5,386</td><td class="over">+$936</td><td class="over">+21.0%</td><td>72 / 87</td><td class="l" title="job closed, forecast is actual cost">final</td></tr><tr><td>Flooring</td><td>100%</td><td>$5,840</td><td>$6,664</td><td>$6,664</td><td class="over">+$824</td><td class="over">+14.1%</td><td>40 / 45</td><td class="l" title="job closed, forecast is actual cost">final</td></tr><tr><td>Cleanup</td><td>100%</td><td>$960</td><td>$969</td><td>$969</td><td class="over">+$9</td><td class="over">+0.9%</td><td>20 / 20</td><td class="l" title="job closed, forecast is actual cost">final</td></tr><tr class="total"><td>Total</td><td>100%</td><td>$11,250</td><td>$13,019</td><td>$13,019</td><td class="over">+$1,769</td><td></td><td></td><td></td></tr>
   </table></div>
-  <ul class="why"><li>Final margin 27.1% is below the 35.0% target by 7.9 points.</li><li>Paint: forecast 21% over estimate (+$936).</li><li>Flooring: forecast 14% over estimate (+$824).</li></ul>
+  <ul class="why"><li>Final margin 27.1% is below the 35.0% target by 7.9 points.</li><li>Paint: final cost 21% over estimate (+$936).</li><li>Flooring: final cost 14% over estimate (+$824).</li></ul>
 </section>
 <section class="job" id="J-103">
   <div class="head"><h3>J-103 Sample Basement Finish</h3><span class="pill TRENDING">Trending below</span></div>
@@ -209,7 +209,7 @@ footer { color:var(--muted); font-size:13px; margin-top:32px; }
 </section>
 
 <footer>
-<p>Forecast methods:</p><ul><li><b>final</b>: job closed, forecast is actual cost</li><li><b>complete</b>: trade reported 100% complete, forecast is actual cost</li><li><b>earned-value</b>: actual cost divided by reported percent complete</li><li><b>early</b>: too early to extrapolate, remaining work held at estimate</li><li><b>no-progress</b>: no progress reported, greater of estimate and actual</li></ul>
+<p>Forecast methods:</p><ul><li><b>final</b>: job closed, forecast is actual cost</li><li><b>complete</b>: trade reported 100% complete, forecast is actual cost</li><li><b>earned-value</b>: actual cost divided by reported percent complete</li><li><b>early</b>: too early to extrapolate, remaining work held at estimate</li><li><b>no-cost</b>: progress reported but no cost booked yet, held at estimate</li><li><b>no-progress</b>: no progress reported, greater of estimate and actual</li></ul>
 <p>Drift is projected margin minus estimated margin. A job is flagged "Below target" when its projected
 margin is under target, and "Trending below" when the slope of projected margin across recent progress
 reports would carry it under target by completion.</p>

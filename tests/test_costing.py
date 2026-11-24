@@ -17,6 +17,7 @@ from jobcost.costing import (
     trend,
 )
 from jobcost.importer import load_dataset
+from jobcost.models import ActualEntry, Dataset, EstimateLine, Job
 
 from conftest import SAMPLE, write_csvs
 
@@ -214,3 +215,24 @@ def test_job_to_dict_is_json_ready(tiny):
 def test_settings_validation():
     with pytest.raises(ValueError):
         analyze(load_dataset(SAMPLE), Settings(target_margin=35))
+
+
+def test_progress_with_no_cost_booked_is_held_at_estimate():
+    # A sub reported 50% (or 100%) done but has not invoiced: the trade is not free.
+    assert forecast_trade(D(1000), D(0), 0.5) == (D(1000), "no-cost")
+    assert forecast_trade(D(1000), D(0), 1.0) == (D(1000), "no-cost")
+    assert forecast_trade(D(1000), D(-40), 0.5) == (D(1000), "no-cost")
+    # A closed job is still taken at actual cost, and an unestimated trade stays at zero.
+    assert forecast_trade(D(1000), D(0), 1.0, final=True) == (D(0), "final")
+    assert forecast_trade(D(0), D(0), 0.5) == (D("0.00"), "earned-value")
+
+
+def test_closed_job_reasons_say_final_cost_not_forecast():
+    data = Dataset(
+        jobs={"C-1": Job("C-1", "Closed", D(5000), status="complete")},
+        estimates=[EstimateLine("C-1", "paint", "labor", "", D(0), D(2000))],
+        actuals=[ActualEntry("C-1", date(2026, 9, 1), "paint", "labor", "", D(0), D(4000))],
+    )
+    job = analyze(data).jobs[0]
+    assert job.status == "BELOW"
+    assert "Paint: final cost 100% over estimate (+$2,000)." in job.reasons
