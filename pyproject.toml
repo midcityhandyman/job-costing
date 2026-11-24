@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "job-costing"
+version = "0.1.0"
+description = "Job costing from CSV: estimate versus actual by trade, margin drift and target margin flags."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+jobcost = "jobcost.cli:main"
+
+[tool.setuptools]
+packages = ["jobcost"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

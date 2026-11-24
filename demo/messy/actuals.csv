@@ -1,0 +1,7 @@
+job_id,date,trade,cost_type,description,hours,rate,amount,vendor
+M-1,2026-09-01,carpentry,labor,Crew day 1,16,58,,
+M-1,09/02/2026,carpentry,material,Lumber order,,,"$1,920.40",Example Building Supply
+M-1,2026-09-03,carpentry,material,Returned boards,,,(85.00),Example Building Supply
+M-1,2026-13-40,carpentry,labor,Bad date,8,58,,
+M-1,2026-09-04,carpentry,equipment,Unknown cost type,,,120,
+M-1,2026-09-04,paint,labor,Hours but no rate,6,,,

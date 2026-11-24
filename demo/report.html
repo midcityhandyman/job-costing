@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job costing report</title>
+<style>
+:root { --bg:#f6f7f9; --card:#fff; --ink:#1c2430; --muted:#5d6878; --line:#dde2ea;
+  --est:#9aa7b8; --good:#2f7d5b; --bad:#c2412d; --warn:#b7791f; --watch:#8a6d1a; --accent:#2b5fab; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#12161c; --card:#1b212a; --ink:#e7ebf1; --muted:#9aa5b5; --line:#2e3744;
+    --est:#5f6c7e; --good:#5cc198; --bad:#f0806c; --warn:#e3b04f; --watch:#d6bd6a; --accent:#7fa9ea; }
+}
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width:1080px; margin:0 auto; padding:24px 16px 48px; }
+h1 { font-size:26px; margin:0 0 4px; }
+h2 { font-size:19px; margin:32px 0 12px; }
+h3 { font-size:17px; margin:0; }
+.sub { color:var(--muted); margin:0 0 20px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px; }
+.card .k { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+.card .v { font-size:22px; font-weight:650; font-variant-numeric:tabular-nums; }
+.card .n { color:var(--muted); font-size:13px; }
+.wrap { overflow-x:auto; background:var(--card); border:1px solid var(--line); border-radius:8px; }
+table { border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums; }
+th, td { padding:8px 12px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--line); }
+th { font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+th:first-child, td:first-child, td.l, th.l { text-align:left; }
+tr:last-child td { border-bottom:none; }
+tr.total td { font-weight:650; border-top:2px solid var(--line); }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.pill { display:inline-block; padding:1px 9px; border-radius:999px; font-size:12px; font-weight:650;
+  border:1px solid currentColor; }
+.BELOW { color:var(--bad); } .TRENDING { color:var(--warn); }
+.WATCH { color:var(--watch); } .OK { color:var(--good); }
+.over { color:var(--bad); } .under { color:var(--good); }
+.job { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px; margin:16px 0; }
+.job .head { display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; }
+.job .meta { color:var(--muted); margin:6px 0 10px; }
+.job .wrap { border:none; border-radius:0; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px; margin:12px 0; }
+.grid figure { margin:0; }
+figcaption { color:var(--muted); font-size:13px; margin-bottom:4px; }
+svg { width:100%; height:auto; display:block; }
+svg text { fill:var(--muted); font-size:11px; font-family:inherit; }
+ul.why { margin:8px 0 0; padding-left:20px; }
+.legend span { display:inline-block; width:10px; height:10px; border-radius:2px; margin:0 4px 0 12px; }
+footer { color:var(--muted); font-size:13px; margin-top:32px; }
+</style>
+</head>
+<body>
+<main>
+<h1>Job costing report</h1>
+<p class="sub">Data through 2026-09-11. Default target margin
+  35%. Synthetic demo data.</p>
+<div class="cards"><div class="card"><div class="k">Contract value</div><div class="v">$237,400</div><div class="n">7 jobs</div></div><div class="card"><div class="k">Estimated margin</div><div class="v">39.2%</div><div class="n">on $144,334 estimated cost</div></div><div class="card"><div class="k">Projected margin</div><div class="v">36.7%</div><div class="n">-2.5 pts versus estimate</div></div><div class="card"><div class="k">Flagged</div><div class="v">3</div><div class="n">2 below, 1 trending, 1 watch</div></div></div>
+
+<h2>Jobs</h2>
+<div class="wrap"><table>
+<tr><th>Job</th><th class="l">Name</th><th>Done</th><th>Contract</th><th>Estimate</th><th>Forecast</th>
+  <th>Est margin</th><th>Proj margin</th><th>Drift pts</th><th>Target</th><th class="l">Status</th></tr>
+<tr><td><a href="#J-102">J-102</a></td><td class="l">Sample Bath Remodel</td><td>77%</td><td>$20,900</td><td>$12,952</td><td>$15,532</td><td>38.0%</td><td>25.7%</td><td class="over">-12.3</td><td>35%</td><td class="l"><span class="pill BELOW">Below target</span></td></tr><tr><td><a href="#J-105">J-105</a></td><td class="l">Sample Rental Turnover</td><td>closed</td><td>$17,850</td><td>$11,250</td><td>$13,019</td><td>37.0%</td><td>27.1%</td><td class="over">-9.9</td><td>35%</td><td class="l"><span class="pill BELOW">Below target</span></td></tr><tr><td><a href="#J-103">J-103</a></td><td class="l">Sample Basement Finish</td><td>64%</td><td>$66,250</td><td>$39,760</td><td>$41,840</td><td>40.0%</td><td>36.8%</td><td class="over">-3.1</td><td>35%</td><td class="l"><span class="pill TRENDING">Trending below</span></td></tr><tr><td><a href="#J-107">J-107</a></td><td class="l">Sample Window Replacement</td><td>72%</td><td>$29,750</td><td>$18,756</td><td>$18,786</td><td>37.0%</td><td>36.9%</td><td class="over">-0.1</td><td>35%</td><td class="l"><span class="pill WATCH">Watch</span></td></tr><tr><td><a href="#J-101">J-101</a></td><td class="l">Sample Kitchen Remodel</td><td>67%</td><td>$59,750</td><td>$35,246</td><td>$34,906</td><td>41.0%</td><td>41.6%</td><td class="under">+0.6</td><td>35%</td><td class="l"><span class="pill OK">On track</span></td></tr><tr><td><a href="#J-104">J-104</a></td><td class="l">Sample Deck Build</td><td>closed</td><td>$21,300</td><td>$14,058</td><td>$13,599</td><td>34.0%</td><td>36.2%</td><td class="under">+2.2</td><td>30%</td><td class="l"><span class="pill OK">On track</span></td></tr><tr><td><a href="#J-106">J-106</a></td><td class="l">Sample Roof Repair</td><td>16%</td><td>$21,600</td><td>$12,312</td><td>$12,557</td><td>43.0%</td><td>41.9%</td><td class="over">-1.1</td><td>35%</td><td class="l"><span class="pill OK">On track</span></td></tr>
+</table></div>
+
+<h2>By trade, all jobs</h2>
+<div class="wrap"><table>
+<tr><th>Trade</th><th>Jobs</th><th>Estimate</th><th>Actual</th><th>Forecast</th><th>Variance</th><th>Var %</th></tr>
+<tr><td>Tile</td><td>1</td><td>$6,068</td><td>$5,008</td><td>$7,474</td><td class="over">+$1,406</td><td class="over">+23.2%</td></tr><tr><td>Plumbing</td><td>3</td><td>$9,600</td><td>$10,953</td><td>$10,953</td><td class="over">+$1,353</td><td class="over">+14.1%</td></tr><tr><td>Paint</td><td>5</td><td>$12,620</td><td>$5,386</td><td>$13,556</td><td class="over">+$936</td><td class="over">+7.4%</td></tr><tr><td>Drywall</td><td>2</td><td>$12,680</td><td>$11,181</td><td>$13,573</td><td class="over">+$893</td><td class="over">+7.0%</td></tr><tr><td>Flooring</td><td>3</td><td>$19,416</td><td>$6,664</td><td>$20,240</td><td class="over">+$824</td><td class="over">+4.2%</td></tr><tr><td>Electrical</td><td>4</td><td>$11,700</td><td>$12,187</td><td>$12,187</td><td class="over">+$487</td><td class="over">+4.2%</td></tr><tr><td>Framing</td><td>1</td><td>$11,160</td><td>$11,604</td><td>$11,604</td><td class="over">+$444</td><td class="over">+4.0%</td></tr><tr><td>Permits</td><td>1</td><td>$0</td><td>$185</td><td>$185</td><td class="over">+$185</td><td class="over">n/a</td></tr><tr><td>Roofing</td><td>1</td><td>$10,320</td><td>$1,298</td><td>$10,380</td><td class="over">+$60</td><td class="over">+0.6%</td></tr><tr><td>Windows</td><td>1</td><td>$14,976</td><td>$11,997</td><td>$14,997</td><td class="over">+$21</td><td class="over">+0.1%</td></tr><tr><td>Carpentry</td><td>2</td><td>$4,532</td><td>$2,200</td><td>$4,541</td><td class="over">+$9</td><td class="over">+0.2%</td></tr><tr><td>Cleanup</td><td>1</td><td>$960</td><td>$969</td><td>$969</td><td class="over">+$9</td><td class="over">+0.9%</td></tr><tr><td>Cabinets</td><td>1</td><td>$13,700</td><td>$9,095</td><td>$13,574</td><td class="under">-$126</td><td class="under">-0.9%</td></tr><tr><td>Demolition</td><td>3</td><td>$4,330</td><td>$4,182</td><td>$4,182</td><td class="under">-$148</td><td class="under">-3.4%</td></tr><tr><td>Decking</td><td>1</td><td>$12,272</td><td>$11,823</td><td>$11,823</td><td class="under">-$449</td><td class="under">-3.7%</td></tr>
+</table></div>
+
+<h2>Job detail</h2>
+
+<section class="job" id="J-102">
+  <div class="head"><h3>J-102 Sample Bath Remodel</h3><span class="pill BELOW">Below target</span></div>
+  <p class="meta">Contract $20,900. Estimated margin 38.0%,
+    projected margin 25.7%
+    (-12.3 pts drift), target 35%. Trend -2.0 pts per 10% of progress, finishing near 21.1%.</p>
+  <div class="grid">
+    <figure><figcaption>Estimate versus forecast by trade
+      <span class="legend"><span style="background:var(--est)"></span>estimate
+      <span style="background:var(--accent)"></span>forecast
+      <span style="background:var(--bad)"></span>over 10%</span></figcaption><svg viewBox="0 0 520 174" role="img" aria-label="Estimate versus forecast by trade"><text x="0" y="20">Demolition</text><rect x="110" y="4" width="59.3" height="11" rx="2" fill="var(--est)"/><rect x="110" y="17" width="58.4" height="11" rx="2" fill="var(--accent)"/><text x="175.3" y="20">$1,283</text><text x="0" y="54">Plumbing</text><rect x="110" y="38" width="145.6" height="11" rx="2" fill="var(--est)"/><rect x="110" y="51" width="198.8" height="11" rx="2" fill="var(--bad)"/><text x="314.8" y="54">$4,370</text><text x="0" y="88">Electrical</text><rect x="110" y="72" width="63.7" height="11" rx="2" fill="var(--est)"/><rect x="110" y="85" width="64.8" height="11" rx="2" fill="var(--accent)"/><text x="180.8" y="88">$1,425</text><text x="0" y="122">Tile</text><rect x="110" y="106" width="276.0" height="11" rx="2" fill="var(--est)"/><rect x="110" y="119" width="340.0" height="11" rx="2" fill="var(--bad)"/><text x="456.0" y="122">$7,474</text><text x="0" y="156">Paint</text><rect x="110" y="140" width="44.6" height="11" rx="2" fill="var(--est)"/><rect x="110" y="153" width="44.6" height="11" rx="2" fill="var(--accent)"/><text x="160.6" y="156">$980</text></svg></figure>
+    <figure><figcaption>Projected margin at each progress report</figcaption><svg viewBox="0 0 520 170" role="img" aria-label="Projected margin over time"><line x1="44" x2="508" y1="52.9" y2="52.9" stroke="var(--bad)" stroke-dasharray="5 4" stroke-width="1"/><text x="0" y="56.9">35% tgt</text><line x1="44" x2="508" y1="29.9" y2="29.9" stroke="var(--est)" stroke-dasharray="2 4" stroke-width="1"/><text x="0" y="33.9">38% est</text><polyline points="44.0,29.2 198.7,70.4 353.3,126.8 508.0,123.6" fill="none" stroke="var(--bad)" stroke-width="2"/><circle cx="44.0" cy="29.2" r="3" fill="var(--bad)"><title>2026-08-21: 38.1%</title></circle><circle cx="198.7" cy="70.4" r="3" fill="var(--bad)"><title>2026-08-28: 32.7%</title></circle><circle cx="353.3" cy="126.8" r="3" fill="var(--bad)"><title>2026-09-04: 25.3%</title></circle><circle cx="508.0" cy="123.6" r="3" fill="var(--bad)"><title>2026-09-11: 25.7%</title></circle><text x="44" y="168">2026-08-21</text><text x="508" y="168" text-anchor="end">2026-09-11 (25.7%)</text></svg></figure>
+  </div>
+  <div class="wrap"><table>
+    <tr><th>Trade</th><th>Done</th><th>Estimate</th><th>Actual</th><th>Forecast</th><th>Variance</th>
+      <th>Var %</th><th>Hours est / act</th><th class="l">Method</th></tr>
+    <tr><td>Demolition</td><td>100%</td><td>$1,304</td><td>$1,283</td><td>$1,283</td><td class="under">-$21</td><td class="under">-1.6%</td><td>24 / 24</td><td class="l" title="trade reported 100% complete, forecast is actual cost">complete</td></tr><tr><td>Plumbing</td><td>100%</td><td>$3,200</td><td>$4,370</td><td>$4,370</td><td class="over">+$1,170</td><td class="over">+36.6%</td><td>0 / 0</td><td class="l" title="trade reported 100% complete, forecast is actual cost">complete</td></tr><tr><td>Electrical</td><td>100%</td><td>$1,400</td><td>$1,425</td><td>$1,425</td><td class="over">+$25</td><td class="over">+1.8%</td><td>0 / 0</td><td class="l" title="trade reported 100% complete, forecast is actual cost">complete</td></tr><tr><td>Tile</td><td>67%</td><td>$6,068</td><td>$5,008</td><td>$7,474</td><td class="over">+$1,406</td><td class="over">+23.2%</td><td>64 / 52</td><td class="l" title="actual cost divided by reported percent complete">earned-value</td></tr><tr><td>Paint</td><td>none</td><td>$980</td><td>$0</td><td>$980</td><td class="">$0</td><td class="">+0.0%</td><td>16 / 0</td><td class="l" title="no progress reported, greater of estimate and actual">no-progress</td></tr><tr class="total"><td>Total</td><td>77%</td><td>$12,952</td><td>$12,086</td><td>$15,532</td><td class="over">+$2,580</td><td></td><td></td><td></td></tr>
+  </table></div>
+  <ul class="why"><li>Projected margin 25.7% is below the 35.0% target by 9.3 points.</li><li>Tile: forecast 23% over estimate (+$1,406).</li><li>Plumbing: forecast 37% over estimate (+$1,170).</li></ul>
+</section>
+<section class="job" id="J-105">
+  <div class="head"><h3>J-105 Sample Rental Turnover</h3><span class="pill BELOW">Below target</span></div>
+  <p class="meta">Contract $17,850. Estimated margin 37.0%,
+    final margin 27.1%
+    (-9.9 pts drift), target 35%.</p>
+  <div class="grid">
+    <figure><figcaption>Estimate versus forecast by trade
+      <span class="legend"><span style="background:var(--est)"></span>estimate
+      <span style="background:var(--accent)"></span>forecast
+      <span style="background:var(--bad)"></span>over 10%</span></figcaption><svg viewBox="0 0 520 106" role="img" aria-label="Estimate versus forecast by trade"><text x="0" y="20">Paint</text><rect x="110" y="4" width="227.0" height="11" rx="2" fill="var(--est)"/><rect x="110" y="17" width="274.8" height="11" rx="2" fill="var(--bad)"/><text x="390.8" y="20">$5,386</text><text x="0" y="54">Flooring</text><rect x="110" y="38" width="297.9" height="11" rx="2" fill="var(--est)"/><rect x="110" y="51" width="340.0" height="11" rx="2" fill="var(--bad)"/><text x="456.0" y="54">$6,664</text><text x="0" y="88">Cleanup</text><rect x="110" y="72" width="49.0" height="11" rx="2" fill="var(--est)"/><rect x="110" y="85" width="49.4" height="11" rx="2" fill="var(--accent)"/><text x="165.4" y="88">$969</text></svg></figure>
+    <figure><figcaption>Projected margin at each progress report</figcaption><svg viewBox="0 0 520 170" role="img" aria-label="Projected margin over time"><line x1="44" x2="508" y1="50.6" y2="50.6" stroke="var(--bad)" stroke-dasharray="5 4" stroke-width="1"/><text x="0" y="54.6">35% tgt</text><line x1="44" x2="508" y1="32.4" y2="32.4" stroke="var(--est)" stroke-dasharray="2 4" stroke-width="1"/><text x="0" y="36.4">37% est</text><polyline points="44.0,121.1 508.0,123.6" fill="none" stroke="var(--bad)" stroke-width="2"/><circle cx="44.0" cy="121.1" r="3" fill="var(--bad)"><title>2026-07-10: 27.3%</title></circle><circle cx="508.0" cy="123.6" r="3" fill="var(--bad)"><title>2026-07-17: 27.1%</title></circle><text x="44" y="168">2026-07-10</text><text x="508" y="168" text-anchor="end">2026-07-17 (27.1%)</text></svg></figure>
+  </div>
+  <div class="wrap"><table>
+    <tr><th>Trade</th><th>Done</th><th>Estimate</th><th>Actual</th><th>Forecast</th><th>Variance</th>
+      <th>Var %</th><th>Hours est / act</th><th class="l">Method</th></tr>
+    <tr><td>Paint</td><td>100%</td><td>$4,450</td><td>$5,386</td><td>$5,386</td><td class="over">+$936</td><td class="over">+21.0%</td><td>72 / 87</td><td class="l" title="job closed, forecast is actual cost">final</td></tr><tr><td>Flooring</td><td>100%</td><td>$5,840</td><td>$6,664</td><td>$6,664</td><td class="over">+$824</td><td class="over">+14.1%</td><td>40 / 45</td><td class="l" title="job closed, forecast is actual cost">final</td></tr><tr><td>Cleanup</td><td>100%</td><td>$960</td><td>$969</td><td>$969</td><td class="over">+$9</td><td class="over">+0.9%</td><td>20 / 20</td><td class="l" title="job closed, forecast is actual cost">final</td></tr><tr class="total"><td>Total</td><td>100%</td><td>$11,250</td><td>$13,019</td><td>$13,019</td><td class="over">+$1,769</td><td></td><td></td><td></td></tr>
+  </table></div>
+  <ul class="why"><li>Final margin 27.1% is below the 35.0% target by 7.9 points.</li><li>Paint: forecast 21% over estimate (+$936).</li><li>Flooring: forecast 14% over estimate (+$824).</li></ul>
+</section>
+<section class="job" id="J-103">
+  <div class="head"><h3>J-103 Sample Basement Finish</h3><span class="pill TRENDING">Trending below</span></div>
+  <p class="meta">Contract $66,250. Estimated margin 40.0%,
+    projected margin 36.8%
+    (-3.1 pts drift), target 35%. Trend -0.7 pts per 10% of progress, finishing near 34.2%.</p>
+  <div class="grid">
+    <figure><figcaption>Estimate versus forecast by trade
+      <span class="legend"><span style="background:var(--est)"></span>estimate
+      <span style="background:var(--accent)"></span>forecast
+      <span style="background:var(--bad)"></span>over 10%</span></figcaption><svg viewBox="0 0 520 208" role="img" aria-label="Estimate versus forecast by trade"><text x="0" y="20">Framing</text><rect x="110" y="4" width="327.0" height="11" rx="2" fill="var(--est)"/><rect x="110" y="17" width="340.0" height="11" rx="2" fill="var(--accent)"/><text x="456.0" y="20">$11,604</text><text x="0" y="54">Electrical</text><rect x="110" y="38" width="152.4" height="11" rx="2" fill="var(--est)"/><rect x="110" y="51" width="165.7" height="11" rx="2" fill="var(--accent)"/><text x="281.7" y="54">$5,654</text><text x="0" y="88">Plumbing</text><rect x="110" y="72" width="76.2" height="11" rx="2" fill="var(--est)"/><rect x="110" y="85" width="80.6" height="11" rx="2" fill="var(--accent)"/><text x="196.6" y="88">$2,750</text><text x="0" y="122">Drywall</text><rect x="110" y="106" width="250.2" height="11" rx="2" fill="var(--est)"/><rect x="110" y="119" width="280.4" height="11" rx="2" fill="var(--bad)"/><text x="396.4" y="122">$9,571</text><text x="0" y="156">Flooring</text><rect x="110" y="140" width="256.7" height="11" rx="2" fill="var(--est)"/><rect x="110" y="153" width="256.7" height="11" rx="2" fill="var(--accent)"/><text x="372.7" y="156">$8,760</text><text x="0" y="190">Paint</text><rect x="110" y="174" width="102.5" height="11" rx="2" fill="var(--est)"/><rect x="110" y="187" width="102.5" height="11" rx="2" fill="var(--accent)"/><text x="218.5" y="190">$3,500</text></svg></figure>
+    <figure><figcaption>Projected margin at each progress report</figcaption><svg viewBox="0 0 520 170" role="img" aria-label="Projected margin over time"><line x1="44" x2="508" y1="113.5" y2="113.5" stroke="var(--bad)" stroke-dasharray="5 4" stroke-width="1"/><text x="0" y="117.5">35% tgt</text><line x1="44" x2="508" y1="42.5" y2="42.5" stroke="var(--est)" stroke-dasharray="2 4" stroke-width="1"/><text x="0" y="46.5">40% est</text><polyline points="44.0,46.3 136.8,50.1 229.6,60.3 322.4,74.6 415.2,82.2 508.0,87.2" fill="none" stroke="var(--good)" stroke-width="2"/><circle cx="44.0" cy="46.3" r="3" fill="var(--good)"><title>2026-07-31: 39.7%</title></circle><circle cx="136.8" cy="50.1" r="3" fill="var(--good)"><title>2026-08-07: 39.4%</title></circle><circle cx="229.6" cy="60.3" r="3" fill="var(--good)"><title>2026-08-14: 38.7%</title></circle><circle cx="322.4" cy="74.6" r="3" fill="var(--good)"><title>2026-08-21: 37.7%</title></circle><circle cx="415.2" cy="82.2" r="3" fill="var(--good)"><title>2026-08-28: 37.2%</title></circle><circle cx="508.0" cy="87.2" r="3" fill="var(--good)"><title>2026-09-04: 36.8%</title></circle><text x="44" y="168">2026-07-31</text><text x="508" y="168" text-anchor="end">2026-09-04 (36.8%)</text></svg></figure>
+  </div>
+  <div class="wrap"><table>
+    <tr><th>Trade</th><th>Done</th><th>Estimate</th><th>Actual</th><th>Forecast</th><th>Variance</th>
+      <th>Var %</th><th>Hours est / act</th><th class="l">Method</th></tr>
+    <tr><td>Framing</td><td>100%</td><td>$11,160</td><td>$11,604</td><td>$11,604</td><td class="over">+$444</td><td class="over">+4.0%</td><td>120 / 124</td><td class="l" title="trade reported 100% complete, forecast is actual cost">complete</td></tr><tr><td>Electrical</td><td>100%</td><td>$5,200</td><td>$5,654</td><td>$5,654</td><td class="over">+$454</td><td class="over">+8.7%</td><td>0 / 0</td><td class="l" title="trade reported 100% complete, forecast is actual cost">complete</td></tr><tr><td>Plumbing</td><td>100%</td><td>$2,600</td><td>$2,750</td><td>$2,750</td><td class="over">+$150</td><td class="over">+5.8%</td><td>0 / 0</td><td class="l" title="trade reported 100% complete, forecast is actual cost">complete</td></tr><tr><td>Drywall</td><td>75%</td><td>$8,540</td><td>$7,178</td><td>$9,571</td><td class="over">+$1,031</td><td class="over">+12.1%</td><td>110 / 92</td><td class="l" title="actual cost divided by reported percent complete">earned-value</td></tr><tr><td>Flooring</td><td>none</td><td>$8,760</td><td>$0</td><td>$8,760</td><td class="">$0</td><td class="">+0.0%</td><td>60 / 0</td><td class="l" title="no progress reported, greater of estimate and actual">no-progress</td></tr><tr><td>Paint</td><td>none</td><td>$3,500</td><td>$0</td><td>$3,500</td><td class="">$0</td><td class="">+0.0%</td><td>56 / 0</td><td class="l" title="no progress reported, greater of estimate and actual">no-progress</td></tr><tr class="total"><td>Total</td><td>64%</td><td>$39,760</td><td>$27,187</td><td>$41,840</td><td class="over">+$2,080</td><td></td><td></td><td></td></tr>
+  </table></div>
+  <ul class="why"><li>Projected margin 36.8% is still above the 35.0% target but is moving -0.7 points per 10% of progress; on that trend the job finishes near 34.2%.</li><li>Drywall: forecast 12% over estimate (+$1,031).</li></ul>
+</section>
+<section class="job" id="J-107">
+  <div class="head"><h3>J-107 Sample Window Replacement</h3><span class="pill WATCH">Watch</span></div>
+  <p class="meta">Contract $29,750. Estimated margin 37.0%,
+    projected margin 36.9%
+    (-0.1 pts drift), target 35%. Trend -0.1 pts per 10% of progress, finishing near 36.6%.</p>
+  <div class="grid">
+    <figure><figcaption>Estimate versus forecast by trade
+      <span class="legend"><span style="background:var(--est)"></span>estimate
+      <span style="background:var(--accent)"></span>forecast
+      <span style="background:var(--bad)"></span>over 10%</span></figcaption><svg viewBox="0 0 520 106" role="img" aria-label="Estimate versus forecast by trade"><text x="0" y="20">Windows</text><rect x="110" y="4" width="339.5" height="11" rx="2" fill="var(--est)"/><rect x="110" y="17" width="340.0" height="11" rx="2" fill="var(--accent)"/><text x="456.0" y="20">$14,997</text><text x="0" y="54">Carpentry</text><rect x="110" y="38" width="57.6" height="11" rx="2" fill="var(--est)"/><rect x="110" y="51" width="57.8" height="11" rx="2" fill="var(--accent)"/><text x="173.8" y="54">$2,549</text><text x="0" y="88">Paint</text><rect x="110" y="72" width="28.1" height="11" rx="2" fill="var(--est)"/><rect x="110" y="85" width="28.1" height="11" rx="2" fill="var(--accent)"/><text x="144.1" y="88">$1,240</text></svg></figure>
+    <figure><figcaption>Projected margin at each progress report</figcaption><svg viewBox="0 0 520 170" role="img" aria-label="Projected margin over time"><line x1="44" x2="508" y1="102.1" y2="102.1" stroke="var(--bad)" stroke-dasharray="5 4" stroke-width="1"/><text x="0" y="106.1">35% tgt</text><line x1="44" x2="508" y1="63.2" y2="63.2" stroke="var(--est)" stroke-dasharray="2 4" stroke-width="1"/><text x="0" y="67.2">37% est</text><polyline points="44.0,53.9 198.7,65.0 353.3,65.6 508.0,65.1" fill="none" stroke="var(--good)" stroke-width="2"/><circle cx="44.0" cy="53.9" r="3" fill="var(--good)"><title>2026-08-14: 37.4%</title></circle><circle cx="198.7" cy="65.0" r="3" fill="var(--good)"><title>2026-08-21: 36.9%</title></circle><circle cx="353.3" cy="65.6" r="3" fill="var(--good)"><title>2026-08-28: 36.8%</title></circle><circle cx="508.0" cy="65.1" r="3" fill="var(--good)"><title>2026-09-04: 36.9%</title></circle><text x="44" y="168">2026-08-14</text><text x="508" y="168" text-anchor="end">2026-09-04 (36.9%)</text></svg></figure>
+  </div>
+  <div class="wrap"><table>
+    <tr><th>Trade</th><th>Done</th><th>Estimate</th><th>Actual</th><th>Forecast</th><th>Variance</th>
+      <th>Var %</th><th>Hours est / act</th><th class="l">Method</th></tr>
+    <tr><td>Windows</td><td>80%</td><td>$14,976</td><td>$11,997</td><td>$14,997</td><td class="over">+$21</td><td class="over">+0.1%</td><td>64 / 51</td><td class="l" title="actual cost divided by reported percent complete">earned-value</td></tr><tr><td>Carpentry</td><td>60%</td><td>$2,540</td><td>$1,529</td><td>$2,549</td><td class="over">+$9</td><td class="over">+0.3%</td><td>30 / 18</td><td class="l" title="actual cost divided by reported percent complete">earned-value</td></tr><tr><td>Paint</td><td>none</td><td>$1,240</td><td>$0</td><td>$1,240</td><td class="">$0</td><td class="">+0.0%</td><td>20 / 0</td><td class="l" title="no progress reported, greater of estimate and actual">no-progress</td></tr><tr class="total"><td>Total</td><td>72%</td><td>$18,756</td><td>$13,527</td><td>$18,786</td><td class="over">+$30</td><td></td><td></td><td></td></tr>
+  </table></div>
+  <ul class="why"><li>Projected margin 36.9% is within 3 points of the 35.0% target.</li></ul>
+</section>
+<section class="job" id="J-101">
+  <div class="head"><h3>J-101 Sample Kitchen Remodel</h3><span class="pill OK">On track</span></div>
+  <p class="meta">Contract $59,750. Estimated margin 41.0%,
+    projected margin 41.6%
+    (+0.6 pts drift), target 35%. Trend +0.1 pts per 10% of progress, finishing near 41.9%.</p>
+  <div class="grid">
+    <figure><figcaption>Estimate versus forecast by trade
+      <span class="legend"><span style="background:var(--est)"></span>estimate
+      <span style="background:var(--accent)"></span>forecast
+      <span style="background:var(--bad)"></span>over 10%</span></figcaption><svg viewBox="0 0 520 242" role="img" aria-label="Estimate versus forecast by trade"><text x="0" y="20">Demolition</text><rect x="110" y="4" width="53.1" height="11" rx="2" fill="var(--est)"/><rect x="110" y="17" width="50.0" height="11" rx="2" fill="var(--accent)"/><text x="169.1" y="20">$2,015</text><text x="0" y="54">Electrical</text><rect x="110" y="38" width="104.2" height="11" rx="2" fill="var(--est)"/><rect x="110" y="51" width="104.6" height="11" rx="2" fill="var(--accent)"/><text x="220.6" y="54">$4,216</text><text x="0" y="88">Plumbing</text><rect x="110" y="72" width="94.3" height="11" rx="2" fill="var(--est)"/><rect x="110" y="85" width="95.1" height="11" rx="2" fill="var(--accent)"/><text x="211.1" y="88">$3,832</text><text x="0" y="122">Drywall</text><rect x="110" y="106" width="102.7" height="11" rx="2" fill="var(--est)"/><rect x="110" y="119" width="99.3" height="11" rx="2" fill="var(--accent)"/><text x="218.7" y="122">$4,002</text><text x="0" y="156">Cabinets</text><rect x="110" y="140" width="340.0" height="11" rx="2" fill="var(--est)"/><rect x="110" y="153" width="336.9" height="11" rx="2" fill="var(--accent)"/><text x="456.0" y="156">$13,574</text><text x="0" y="190">Flooring</text><rect x="110" y="174" width="119.5" height="11" rx="2" fill="var(--est)"/><rect x="110" y="187" width="119.5" height="11" rx="2" fill="var(--accent)"/><text x="235.5" y="190">$4,816</text><text x="0" y="224">Paint</text><rect x="110" y="208" width="60.8" height="11" rx="2" fill="var(--est)"/><rect x="110" y="221" width="60.8" height="11" rx="2" fill="var(--accent)"/><text x="176.8" y="224">$2,450</text></svg></figure>
+    <figure><figcaption>Projected margin at each progress report</figcaption><svg viewBox="0 0 520 170" role="img" aria-label="Projected margin over time"><line x1="44" x2="508" y1="117.8" y2="117.8" stroke="var(--bad)" stroke-dasharray="5 4" stroke-width="1"/><text x="0" y="121.8">35% tgt</text><line x1="44" x2="508" y1="45.1" y2="45.1" stroke="var(--est)" stroke-dasharray="2 4" stroke-width="1"/><text x="0" y="49.1">41% est</text><polyline points="44.0,42.6 160.0,43.3 276.0,40.8 392.0,38.8 508.0,38.2" fill="none" stroke="var(--good)" stroke-width="2"/><circle cx="44.0" cy="42.6" r="3" fill="var(--good)"><title>2026-08-07: 41.2%</title></circle><circle cx="160.0" cy="43.3" r="3" fill="var(--good)"><title>2026-08-14: 41.2%</title></circle><circle cx="276.0" cy="40.8" r="3" fill="var(--good)"><title>2026-08-21: 41.4%</title></circle><circle cx="392.0" cy="38.8" r="3" fill="var(--good)"><title>2026-08-28: 41.5%</title></circle><circle cx="508.0" cy="38.2" r="3" fill="var(--good)"><title>2026-09-04: 41.6%</title></circle><text x="44" y="168">2026-08-07</text><text x="508" y="168" text-anchor="end">2026-09-04 (41.6%)</text></svg></figure>
+  </div>
+  <div class="wrap"><table>
+    <tr><th>Trade</th><th>Done</th><th>Estimate</th><th>Actual</th><th>Forecast</th><th>Variance</th>
+      <th>Var %</th><th>Hours est / act</th><th class="l">Method</th></tr>
+    <tr><td>Demolition</td><td>100%</td><td>$2,140</td><td>$2,015</td><td>$2,015</td><td class="under">-$125</td><td class="under">-5.8%</td><td>40 / 38</td><td class="l" title="trade reported 100% complete, forecast is actual cost">complete</td></tr><tr><td>Electrical</td><td>100%</td><td>$4,200</td><td>$4,216</td><td>$4,216</td><td class="over">+$16</td><td class="over">+0.4%</td><td>0 / 0</td><td class="l" title="trade reported 100% complete, forecast is actual cost">complete</td></tr><tr><td>Plumbing</td><td>100%</td><td>$3,800</td><td>$3,832</td><td>$3,832</td><td class="over">+$32</td><td class="over">+0.9%</td><td>0 / 0</td><td class="l" title="trade reported 100% complete, forecast is actual cost">complete</td></tr><tr><td>Drywall</td><td>100%</td><td>$4,140</td><td>$4,002</td><td>$4,002</td><td class="under">-$138</td><td class="under">-3.3%</td><td>60 / 58</td><td class="l" title="trade reported 100% complete, forecast is actual cost">complete</td></tr><tr><td>Cabinets</td><td>67%</td><td>$13,700</td><td>$9,095</td><td>$13,574</td><td class="under">-$126</td><td class="under">-0.9%</td><td>70 / 46</td><td class="l" title="actual cost divided by reported percent complete">earned-value</td></tr><tr><td>Flooring</td><td>none</td><td>$4,816</td><td>$0</td><td>$4,816</td><td class="">$0</td><td class="">+0.0%</td><td>36 / 0</td><td class="l" title="no progress reported, greater of estimate and actual">no-progress</td></tr><tr><td>Paint</td><td>none</td><td>$2,450</td><td>$0</td><td>$2,450</td><td class="">$0</td><td class="">+0.0%</td><td>40 / 0</td><td class="l" title="no progress reported, greater of estimate and actual">no-progress</td></tr><tr class="total"><td>Total</td><td>67%</td><td>$35,246</td><td>$23,160</td><td>$34,906</td><td class="under">-$340</td><td></td><td></td><td></td></tr>
+  </table></div>
+  
+</section>
+<section class="job" id="J-104">
+  <div class="head"><h3>J-104 Sample Deck Build</h3><span class="pill OK">On track</span></div>
+  <p class="meta">Contract $21,300. Estimated margin 34.0%,
+    final margin 36.2%
+    (+2.2 pts drift), target 30%.</p>
+  <div class="grid">
+    <figure><figcaption>Estimate versus forecast by trade
+      <span class="legend"><span style="background:var(--est)"></span>estimate
+      <span style="background:var(--accent)"></span>forecast
+      <span style="background:var(--bad)"></span>over 10%</span></figcaption><svg viewBox="0 0 520 106" role="img" aria-label="Estimate versus forecast by trade"><text x="0" y="20">Demolition</text><rect x="110" y="4" width="24.5" height="11" rx="2" fill="var(--est)"/><rect x="110" y="17" width="24.5" height="11" rx="2" fill="var(--accent)"/><text x="140.5" y="20">$883</text><text x="0" y="54">Decking</text><rect x="110" y="38" width="340.0" height="11" rx="2" fill="var(--est)"/><rect x="110" y="51" width="327.6" height="11" rx="2" fill="var(--accent)"/><text x="456.0" y="54">$11,823</text><text x="0" y="88">Electrical</text><rect x="110" y="72" width="24.9" height="11" rx="2" fill="var(--est)"/><rect x="110" y="85" width="24.7" height="11" rx="2" fill="var(--accent)"/><text x="140.9" y="88">$892</text></svg></figure>
+    <figure><figcaption>Projected margin at each progress report</figcaption><svg viewBox="0 0 520 170" role="img" aria-label="Projected margin over time"><line x1="44" x2="508" y1="118.3" y2="118.3" stroke="var(--bad)" stroke-dasharray="5 4" stroke-width="1"/><text x="0" y="122.3">30% tgt</text><line x1="44" x2="508" y1="71.0" y2="71.0" stroke="var(--est)" stroke-dasharray="2 4" stroke-width="1"/><text x="0" y="75.0">34% est</text><polyline points="44.0,43.7 276.0,37.7 508.0,45.5" fill="none" stroke="var(--good)" stroke-width="2"/><circle cx="44.0" cy="43.7" r="3" fill="var(--good)"><title>2026-06-19: 36.3%</title></circle><circle cx="276.0" cy="37.7" r="3" fill="var(--good)"><title>2026-06-26: 36.8%</title></circle><circle cx="508.0" cy="45.5" r="3" fill="var(--good)"><title>2026-07-03: 36.2%</title></circle><text x="44" y="168">2026-06-19</text><text x="508" y="168" text-anchor="end">2026-07-03 (36.2%)</text></svg></figure>
+  </div>
+  <div class="wrap"><table>
+    <tr><th>Trade</th><th>Done</th><th>Estimate</th><th>Actual</th><th>Forecast</th><th>Variance</th>
+      <th>Var %</th><th>Hours est / act</th><th class="l">Method</th></tr>
+    <tr><td>Demolition</td><td>100%</td><td>$886</td><td>$883</td><td>$883</td><td class="under">-$3</td><td class="under">-0.3%</td><td>16 / 16</td><td class="l" title="job closed, forecast is actual cost">final</td></tr><tr><td>Decking</td><td>100%</td><td>$12,272</td><td>$11,823</td><td>$11,823</td><td class="under">-$449</td><td class="under">-3.7%</td><td>96 / 93</td><td class="l" title="job closed, forecast is actual cost">final</td></tr><tr><td>Electrical</td><td>100%</td><td>$900</td><td>$892</td><td>$892</td><td class="under">-$8</td><td class="under">-0.8%</td><td>0 / 0</td><td class="l" title="job closed, forecast is actual cost">final</td></tr><tr class="total"><td>Total</td><td>100%</td><td>$14,058</td><td>$13,599</td><td>$13,599</td><td class="under">-$459</td><td></td><td></td><td></td></tr>
+  </table></div>
+  
+</section>
+<section class="job" id="J-106">
+  <div class="head"><h3>J-106 Sample Roof Repair</h3><span class="pill OK">On track</span></div>
+  <p class="meta">Contract $21,600. Estimated margin 43.0%,
+    projected margin 41.9%
+    (-1.1 pts drift), target 35%.</p>
+  <div class="grid">
+    <figure><figcaption>Estimate versus forecast by trade
+      <span class="legend"><span style="background:var(--est)"></span>estimate
+      <span style="background:var(--accent)"></span>forecast
+      <span style="background:var(--bad)"></span>over 10%</span></figcaption><svg viewBox="0 0 520 106" role="img" aria-label="Estimate versus forecast by trade"><text x="0" y="20">Roofing</text><rect x="110" y="4" width="338.0" height="11" rx="2" fill="var(--est)"/><rect x="110" y="17" width="340.0" height="11" rx="2" fill="var(--accent)"/><text x="456.0" y="20">$10,380</text><text x="0" y="54">Carpentry</text><rect x="110" y="38" width="65.3" height="11" rx="2" fill="var(--est)"/><rect x="110" y="51" width="65.3" height="11" rx="2" fill="var(--accent)"/><text x="181.3" y="54">$1,992</text><text x="0" y="88">Permits</text><rect x="110" y="72" width="0.0" height="11" rx="2" fill="var(--est)"/><rect x="110" y="85" width="6.1" height="11" rx="2" fill="var(--bad)"/><text x="122.1" y="88">$185</text></svg></figure>
+    <figure><figcaption>Projected margin at each progress report</figcaption><p class="sub">Not enough progress reports for a margin history yet.</p></figure>
+  </div>
+  <div class="wrap"><table>
+    <tr><th>Trade</th><th>Done</th><th>Estimate</th><th>Actual</th><th>Forecast</th><th>Variance</th>
+      <th>Var %</th><th>Hours est / act</th><th class="l">Method</th></tr>
+    <tr><td>Roofing</td><td>12%</td><td>$10,320</td><td>$1,298</td><td>$10,380</td><td class="over">+$60</td><td class="over">+0.6%</td><td>80 / 10</td><td class="l" title="too early to extrapolate, remaining work held at estimate">early</td></tr><tr><td>Carpentry</td><td>none</td><td>$1,992</td><td>$671</td><td>$1,992</td><td class="">$0</td><td class="">+0.0%</td><td>24 / 8</td><td class="l" title="no progress reported, greater of estimate and actual">no-progress</td></tr><tr><td>Permits</td><td>none</td><td>$0</td><td>$185</td><td>$185</td><td class="over">+$185</td><td class="over">n/a</td><td>0 / 0</td><td class="l" title="no progress reported, greater of estimate and actual">no-progress</td></tr><tr class="total"><td>Total</td><td>16%</td><td>$12,312</td><td>$2,154</td><td>$12,557</td><td class="over">+$245</td><td></td><td></td><td></td></tr>
+  </table></div>
+  
+</section>
+
+<footer>
+<p>Forecast methods:</p><ul><li><b>final</b>: job closed, forecast is actual cost</li><li><b>complete</b>: trade reported 100% complete, forecast is actual cost</li><li><b>earned-value</b>: actual cost divided by reported percent complete</li><li><b>early</b>: too early to extrapolate, remaining work held at estimate</li><li><b>no-progress</b>: no progress reported, greater of estimate and actual</li></ul>
+<p>Drift is projected margin minus estimated margin. A job is flagged "Below target" when its projected
+margin is under target, and "Trending below" when the slope of projected margin across recent progress
+reports would carry it under target by completion.</p>
+</footer>
+</main>
+</body>
+</html>

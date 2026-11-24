@@ -1,0 +1,8 @@
+job_id,name,contract_amount,status,target_margin_pct
+J-101,Sample Kitchen Remodel,59750.00,active,
+J-102,Sample Bath Remodel,20900.00,active,
+J-103,Sample Basement Finish,66250.00,active,
+J-104,Sample Deck Build,21300.00,complete,30
+J-105,Sample Rental Turnover,17850.00,complete,
+J-106,Sample Roof Repair,21600.00,active,
+J-107,Sample Window Replacement,29750.00,active,

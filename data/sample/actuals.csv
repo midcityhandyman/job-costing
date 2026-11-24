@@ -1,0 +1,80 @@
+job_id,date,trade,cost_type,description,hours,rate,amount,vendor
+J-101,2026-08-06,demolition,labor,"Demolition crew, week 1",37.7,46.00,,
+J-101,2026-08-04,demolition,material,"Demolition materials, week 1",,,281.02,Example Building Supply
+J-101,2026-08-14,electrical,sub,Electrical progress invoice 2,,,2112.68,Sample Electrical Subcontractor
+J-101,2026-08-14,plumbing,sub,Plumbing progress invoice 2,,,1904.86,Sample Plumbing Subcontractor
+J-101,2026-08-21,electrical,sub,Electrical progress invoice 3,,,2103.01,Sample Electrical Subcontractor
+J-101,2026-08-21,plumbing,sub,Plumbing progress invoice 3,,,1927.59,Sample Plumbing Subcontractor
+J-101,2026-08-20,drywall,labor,"Drywall crew, week 3",28.9,54.00,,
+J-101,2026-08-18,drywall,material,"Drywall materials, week 3",,,441.13,Example Building Supply
+J-101,2026-08-27,drywall,labor,"Drywall crew, week 4",28.9,54.00,,
+J-101,2026-08-25,drywall,material,"Drywall materials, week 4",,,439.83,Example Building Supply
+J-101,2026-08-27,cabinets,labor,"Cabinets crew, week 4",22.9,60.00,,
+J-101,2026-08-25,cabinets,material,"Cabinets materials, week 4",,,3114.82,Example Building Supply
+J-101,2026-09-03,cabinets,labor,"Cabinets crew, week 5",23.3,60.00,,
+J-101,2026-09-01,cabinets,material,"Cabinets materials, week 5",,,3208.07,Example Building Supply
+J-102,2026-08-20,demolition,labor,"Demolition crew, week 1",23.6,46.00,,
+J-102,2026-08-18,demolition,material,"Demolition materials, week 1",,,197.79,Example Building Supply
+J-102,2026-08-28,plumbing,sub,Plumbing progress invoice 2,,,2154.93,Sample Plumbing Subcontractor
+J-102,2026-08-28,electrical,sub,Electrical progress invoice 2,,,1425.07,Sample Electrical Subcontractor
+J-102,2026-09-04,plumbing,sub,Plumbing progress invoice 3,,,2214.81,Sample Plumbing Subcontractor
+J-102,2026-09-03,tile,labor,"Tile crew, week 3",26.1,62.00,,
+J-102,2026-09-01,tile,material,"Tile materials, week 3",,,877.40,Example Building Supply
+J-102,2026-09-10,tile,labor,"Tile crew, week 4",26.2,62.00,,
+J-102,2026-09-08,tile,material,"Tile materials, week 4",,,887.55,Example Building Supply
+J-103,2026-07-30,framing,labor,"Framing crew, week 1",40.3,58.00,,
+J-103,2026-07-28,framing,material,"Framing materials, week 1",,,1403.08,Example Building Supply
+J-103,2026-08-06,framing,labor,"Framing crew, week 2",41.4,58.00,,
+J-103,2026-08-04,framing,material,"Framing materials, week 2",,,1458.74,Example Building Supply
+J-103,2026-08-07,electrical,sub,Electrical progress invoice 2,,,1342.77,Sample Electrical Subcontractor
+J-103,2026-08-13,framing,labor,"Framing crew, week 3",42.8,58.00,,
+J-103,2026-08-11,framing,material,"Framing materials, week 3",,,1521.62,Example Building Supply
+J-103,2026-08-14,electrical,sub,Electrical progress invoice 3,,,1385.66,Sample Electrical Subcontractor
+J-103,2026-08-14,plumbing,sub,Plumbing progress invoice 3,,,1364.50,Sample Plumbing Subcontractor
+J-103,2026-08-21,electrical,sub,Electrical progress invoice 4,,,1432.73,Sample Electrical Subcontractor
+J-103,2026-08-21,plumbing,sub,Plumbing progress invoice 4,,,1385.83,Sample Plumbing Subcontractor
+J-103,2026-08-20,drywall,labor,"Drywall crew, week 4",29.2,54.00,,
+J-103,2026-08-18,drywall,material,"Drywall materials, week 4",,,695.35,Example Building Supply
+J-103,2026-08-28,electrical,sub,Electrical progress invoice 5,,,1492.69,Sample Electrical Subcontractor
+J-103,2026-08-27,drywall,labor,"Drywall crew, week 5",30.9,54.00,,
+J-103,2026-08-25,drywall,material,"Drywall materials, week 5",,,727.43,Example Building Supply
+J-103,2026-09-03,drywall,labor,"Drywall crew, week 6",32.4,54.00,,
+J-103,2026-09-01,drywall,material,"Drywall materials, week 6",,,760.70,Example Building Supply
+J-104,2026-06-18,demolition,labor,"Demolition crew, week 1",15.9,46.00,,
+J-104,2026-06-16,demolition,material,"Demolition materials, week 1",,,151.77,Example Building Supply
+J-104,2026-06-18,decking,labor,"Decking crew, week 1",30.7,57.00,,
+J-104,2026-06-16,decking,material,"Decking materials, week 1",,,2138.77,Example Building Supply
+J-104,2026-06-25,decking,labor,"Decking crew, week 2",30.8,57.00,,
+J-104,2026-06-23,decking,material,"Decking materials, week 2",,,2178.19,Example Building Supply
+J-104,2026-07-02,decking,labor,"Decking crew, week 3",31.4,57.00,,
+J-104,2026-06-30,decking,material,"Decking materials, week 3",,,2211.22,Example Building Supply
+J-104,2026-07-03,electrical,sub,Electrical progress invoice 3,,,892.37,Sample Electrical Subcontractor
+J-105,2026-07-09,paint,labor,"Paint crew, week 1",43.8,50.00,,
+J-105,2026-07-07,paint,material,"Paint materials, week 1",,,500.12,Example Building Supply
+J-105,2026-07-09,flooring,labor,"Flooring crew, week 1",22.5,56.00,,
+J-105,2026-07-07,flooring,material,"Flooring materials, week 1",,,2054.92,Example Building Supply
+J-105,2026-07-16,paint,labor,"Paint crew, week 2",43.5,50.00,,
+J-105,2026-07-14,paint,material,"Paint materials, week 2",,,520.40,Example Building Supply
+J-105,2026-07-16,flooring,labor,"Flooring crew, week 2",22.6,56.00,,
+J-105,2026-07-14,flooring,material,"Flooring materials, week 2",,,2083.93,Example Building Supply
+J-105,2026-07-16,cleanup,labor,"Cleanup crew, week 2",20.2,42.00,,
+J-105,2026-07-14,cleanup,material,"Cleanup materials, week 2",,,120.35,Example Building Supply
+J-106,2026-09-10,roofing,labor,"Roofing crew, week 1",10.2,64.00,,
+J-106,2026-09-08,roofing,material,"Roofing materials, week 1",,,645.16,Example Building Supply
+J-106,2026-09-10,carpentry,labor,"Carpentry crew, week 1",8.1,58.00,,
+J-106,2026-09-08,carpentry,material,"Carpentry materials, week 1",,,200.75,Example Building Supply
+J-106,2026-09-09,permits,material,"Permit fee, not in estimate",,,185.00,Example Permit Office
+J-107,2026-08-13,windows,labor,"Windows crew, week 1",12.7,59.00,,
+J-107,2026-08-11,windows,material,"Windows materials, week 1",,,2218.19,Example Building Supply
+J-107,2026-08-20,windows,labor,"Windows crew, week 2",12.9,59.00,,
+J-107,2026-08-18,windows,material,"Windows materials, week 2",,,2270.72,Example Building Supply
+J-107,2026-08-20,carpentry,labor,"Carpentry crew, week 2",6,58.00,,
+J-107,2026-08-18,carpentry,material,"Carpentry materials, week 2",,,161.05,Example Building Supply
+J-107,2026-08-27,windows,labor,"Windows crew, week 3",12.6,59.00,,
+J-107,2026-08-25,windows,material,"Windows materials, week 3",,,2258.05,Example Building Supply
+J-107,2026-08-27,carpentry,labor,"Carpentry crew, week 3",6,58.00,,
+J-107,2026-08-25,carpentry,material,"Carpentry materials, week 3",,,163.16,Example Building Supply
+J-107,2026-09-03,windows,labor,"Windows crew, week 4",13,59.00,,
+J-107,2026-09-01,windows,material,"Windows materials, week 4",,,2229.58,Example Building Supply
+J-107,2026-09-03,carpentry,labor,"Carpentry crew, week 4",6,58.00,,
+J-107,2026-09-01,carpentry,material,"Carpentry materials, week 4",,,161.08,Example Building Supply

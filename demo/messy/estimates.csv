@@ -1,0 +1,5 @@
+job_id,trade,cost_type,description,quantity,unit_cost,amount
+M-1,Carpentry,labour,Porch framing labor,40,58,
+M-1,carpentry,materials,Lumber and fasteners,,,"1,850.00"
+M-1,paint,labor,Prime and paint,12,,
+M-9,paint,labor,Job that does not exist,8,50,

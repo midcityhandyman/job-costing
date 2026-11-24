@@ -1,0 +1,237 @@
+job-costing demo (synthetic data, fully offline)
+
+====================================================================================================
+# Check the synthetic data set imports cleanly
+$ python -m jobcost validate --data data/sample
+
+data/sample: 7 jobs, 51 estimate lines, 79 actual entries, 45 progress reports
+No import issues.
+[exit code 0]
+
+====================================================================================================
+# Portfolio summary: margin, drift and status per job
+$ python -m jobcost summary --data data/sample
+
+Job costing summary as of 2026-09-11 (default target margin 35%)
+
+Job    Name                         Done  Contract  Estimate    Actual  Forecast  Est mgn  Proj mgn  Drift  Target    Status
+-----  -------------------------  ------  --------  --------  --------  --------  -------  --------  -----  ------  --------
+J-102  Sample Bath Remodel           77%   $20,900   $12,952   $12,086   $15,532    38.0%     25.7%  -12.3     35%     BELOW
+J-105  Sample Rental Turnover     closed   $17,850   $11,250   $13,019   $13,019    37.0%     27.1%   -9.9     35%     BELOW
+J-103  Sample Basement Finish        64%   $66,250   $39,760   $27,187   $41,840    40.0%     36.8%   -3.1     35%  TRENDING
+J-107  Sample Window Replacement     72%   $29,750   $18,756   $13,527   $18,786    37.0%     36.9%   -0.1     35%     WATCH
+J-101  Sample Kitchen Remodel        67%   $59,750   $35,246   $23,160   $34,906    41.0%     41.6%   +0.6     35%        OK
+J-104  Sample Deck Build          closed   $21,300   $14,058   $13,599   $13,599    34.0%     36.2%   +2.2     30%        OK
+J-106  Sample Roof Repair            16%   $21,600   $12,312    $2,154   $12,557    43.0%     41.9%   -1.1     35%        OK
+TOTAL  7 jobs                             $237,400  $144,334  $104,731  $150,238    39.2%     36.7%   -2.5
+
+Status counts: BELOW 2, TRENDING 1, WATCH 1, OK 3
+Drift is projected margin minus estimated margin, in margin points.
+[exit code 0]
+
+====================================================================================================
+# Which jobs are below, or trending below, target margin
+$ python -m jobcost flags --data data/sample
+
+3 job(s) flagged, 1 on watch (as of 2026-09-11)
+
+[BELOW] J-102 Sample Bath Remodel: projected 25.7% vs target 35% (estimated 38.0%, drift -12.3 pts)
+    - Projected margin 25.7% is below the 35.0% target by 9.3 points.
+    - Tile: forecast 23% over estimate (+$1,406).
+    - Plumbing: forecast 37% over estimate (+$1,170).
+
+[BELOW] J-105 Sample Rental Turnover: projected 27.1% vs target 35% (estimated 37.0%, drift -9.9 pts)
+    - Final margin 27.1% is below the 35.0% target by 7.9 points.
+    - Paint: forecast 21% over estimate (+$936).
+    - Flooring: forecast 14% over estimate (+$824).
+
+[TRENDING] J-103 Sample Basement Finish: projected 36.8% vs target 35% (estimated 40.0%, drift -3.1 pts)
+    - Projected margin 36.8% is still above the 35.0% target but is moving -0.7 points per 10% of progress; on that trend the job finishes near 34.2%.
+    - Drywall: forecast 12% over estimate (+$1,031).
+
+[WATCH] J-107 Sample Window Replacement: projected 36.9% vs target 35% (estimated 37.0%, drift -0.1 pts)
+    - Projected margin 36.9% is within 3 points of the 35.0% target.
+[exit code 0]
+
+====================================================================================================
+# Estimate versus forecast by trade across all jobs
+$ python -m jobcost trades --data data/sample
+
+Estimate versus forecast by trade, all jobs (worst overrun first)
+
+Trade       Jobs  Estimate   Actual  Forecast  Variance   Var %
+----------  ----  --------  -------  --------  --------  ------
+Tile           1    $6,068   $5,008    $7,474   +$1,406  +23.2%
+Plumbing       3    $9,600  $10,953   $10,953   +$1,353  +14.1%
+Paint          5   $12,620   $5,386   $13,556     +$936   +7.4%
+Drywall        2   $12,680  $11,181   $13,573     +$893   +7.0%
+Flooring       3   $19,416   $6,664   $20,240     +$824   +4.2%
+Electrical     4   $11,700  $12,187   $12,187     +$487   +4.2%
+Framing        1   $11,160  $11,604   $11,604     +$444   +4.0%
+Permits        1        $0     $185      $185     +$185     n/a
+Roofing        1   $10,320   $1,298   $10,380      +$60   +0.6%
+Windows        1   $14,976  $11,997   $14,997      +$21   +0.1%
+Carpentry      2    $4,532   $2,200    $4,541       +$9   +0.2%
+Cleanup        1      $960     $969      $969       +$9   +0.9%
+Cabinets       1   $13,700   $9,095   $13,574     -$126   -0.9%
+Demolition     3    $4,330   $4,182    $4,182     -$148   -3.4%
+Decking        1   $12,272  $11,823   $11,823     -$449   -3.7%
+[exit code 0]
+
+====================================================================================================
+# Drill into the job that is trending below target
+$ python -m jobcost job J-103 --data data/sample
+
+J-103  Sample Basement Finish  [TRENDING]
+Contract $66,250 | job status active | last activity 2026-09-04
+Estimated margin 40.0% | projected margin 36.8% | drift -3.1 pts | target 35%
+Trend: -0.7 pts per 10% of progress, finishing near 34.2% if it holds
+
+Trade       Done  Estimate   Actual  Forecast  Variance   Var %  Hrs est/act        Method
+----------  ----  --------  -------  --------  --------  ------  -----------  ------------
+Framing     100%   $11,160  $11,604   $11,604     +$444   +4.0%      120/124      complete
+Electrical  100%    $5,200   $5,654    $5,654     +$454   +8.7%          0/0      complete
+Plumbing    100%    $2,600   $2,750    $2,750     +$150   +5.8%          0/0      complete
+Drywall      75%    $8,540   $7,178    $9,571   +$1,031  +12.1%       110/92  earned-value
+Flooring    none    $8,760       $0    $8,760        $0   +0.0%         60/0   no-progress
+Paint       none    $3,500       $0    $3,500        $0   +0.0%         56/0   no-progress
+TOTAL        64%   $39,760  $27,187   $41,840   +$2,080   +5.2%
+
+Cost type  Estimate   Actual
+---------  --------  -------
+labor       $19,060  $12,216
+material    $12,900   $6,567
+sub          $7,800   $8,404
+
+Margin history
+As of       Done   Actual  Forecast  Proj mgn
+----------  ----  -------  --------  --------
+2026-07-31    9%   $3,740   $39,935     39.7%
+2026-08-07   22%   $8,943   $40,115     39.4%
+2026-08-14   38%  $15,697   $40,590     38.7%
+2026-08-21   50%  $20,788   $41,252     37.7%
+2026-08-28   58%  $24,677   $41,605     37.2%
+2026-09-04   64%  $27,187   $41,840     36.8%
+
+Why:
+  - Projected margin 36.8% is still above the 35.0% target but is moving -0.7 points per 10% of progress; on that trend the job finishes near 34.2%.
+  - Drywall: forecast 12% over estimate (+$1,031).
+
+Forecast methods:
+  complete: trade reported 100% complete, forecast is actual cost
+  earned-value: actual cost divided by reported percent complete
+  no-progress: no progress reported, greater of estimate and actual
+[exit code 0]
+
+====================================================================================================
+# Same data three weeks earlier: J-103 was only on watch and J-102 still looked fine
+$ python -m jobcost summary --data data/sample --as-of 2026-08-21
+
+Job costing summary as of 2026-08-21 (default target margin 35%)
+
+Job    Name                         Done  Contract  Estimate   Actual  Forecast  Est mgn  Proj mgn  Drift  Target  Status
+-----  -------------------------  ------  --------  --------  -------  --------  -------  --------  -----  ------  ------
+J-105  Sample Rental Turnover     closed   $17,850   $11,250  $13,019   $13,019    37.0%     27.1%   -9.9     35%   BELOW
+J-103  Sample Basement Finish        50%   $66,250   $39,760  $20,788   $41,252    40.0%     37.7%   -2.3     35%   WATCH
+J-107  Sample Window Replacement     35%   $29,750   $18,756   $6,508   $18,784    37.0%     36.9%   -0.1     35%   WATCH
+J-101  Sample Kitchen Remodel        35%   $59,750   $35,246  $12,065   $35,033    41.0%     41.4%   +0.4     35%      OK
+J-102  Sample Bath Remodel           10%   $20,900   $12,952   $1,283   $12,931    38.0%     38.1%   +0.1     35%      OK
+J-104  Sample Deck Build          closed   $21,300   $14,058  $13,599   $13,599    34.0%     36.2%   +2.2     30%      OK
+J-106  Sample Roof Repair             0%   $21,600   $12,312       $0   $12,312    43.0%     43.0%   +0.0     35%      OK
+TOTAL  7 jobs                             $237,400  $144,334  $67,263  $146,929    39.2%     38.1%   -1.1
+
+Status counts: BELOW 1, TRENDING 0, WATCH 2, OK 4
+Drift is projected margin minus estimated margin, in margin points.
+[exit code 0]
+
+====================================================================================================
+# Use as a gate in a scheduled job: exit code 2 when anything is flagged
+$ python -m jobcost flags --data data/sample --fail-on-flag --json
+
+[
+  {
+    "job_id": "J-102",
+    "name": "Sample Bath Remodel",
+    "job_status": "active",
+    "contract": 20900.0,
+    "estimate": 12952.0,
+    "actual": 12085.75,
+    "forecast": 15532.16,
+    "percent_complete": 0.7697,
+    "estimated_margin": 0.3803,
+    "projected_margin": 0.2568,
+    "drift_points": -12.35,
+    "target_margin": 0.35,
+    "trend_margin": 0.2105,
+    "status": "BELOW",
+    "reasons": [
+      "Projected margin 25.7% is below the 35.0% target by 9.3 points.",
+      "Tile: forecast 23% over estimate (+$1,406).",
+      "Plumbing: forecast 37% over estimate (+$1,170)."
+    ]
+  },
+  {
+    "job_id": "J-105",
+    "name": "Sample Rental Turnover",
+    "job_status": "complete",
+    "contract": 17850.0,
+    "estimate": 11250.0,
+    "actual": 13018.72,
+    "forecast": 13018.72,
+    "percent_complete": 1.0,
+    "estimated_margin": 0.3697,
+    "projected_margin": 0.2707,
+    "drift_points": -9.91,
+    "target_margin": 0.35,
+    "trend_margin": null,
+    "status": "BELOW",
+    "reasons": [
+      "Final margin 27.1% is below the 35.0% target by 7.9 points.",
+      "Paint: forecast 21% over estimate (+$936).",
+      "Flooring: forecast 14% over estimate (+$824)."
+    ]
+  },
+  {
+    "job_id": "J-103",
+    "name": "Sample Basement Finish",
+    "job_status": "active",
+    "contract": 66250.0,
+    "estimate": 39760.0,
+    "actual": 27187.1,
+    "forecast": 41839.93,
+    "percent_complete": 0.638,
+    "estimated_margin": 0.3998,
+    "projected_margin": 0.3685,
+    "drift_points": -3.14,
+    "target_margin": 0.35,
+    "trend_margin": 0.3422,
+    "status": "TRENDING",
+    "reasons": [
+      "Projected margin 36.8% is still above the 35.0% target but is moving -0.7 points per 10% of progress; on that trend the job finishes near 34.2%.",
+      "Drywall: forecast 12% over estimate (+$1,031)."
+    ]
+  }
+]
+[exit code 2]
+
+====================================================================================================
+# A messy export: bad rows are skipped and listed, good rows still load
+$ python -m jobcost validate --data demo/messy
+
+demo/messy: 1 jobs, 2 estimate lines, 3 actual entries, 0 progress reports
+7 row(s) skipped during import:
+  jobs.csv:3: contract_amount must be greater than zero
+  jobs.csv:4: duplicate job_id 'M-1'
+  estimates.csv:4: give either amount, or both quantity and unit_cost
+  estimates.csv:5: unknown job_id 'M-9'
+  actuals.csv:5: not a date (use YYYY-MM-DD): '2026-13-40'
+  actuals.csv:6: cost_type must be one of labor, material, sub; got 'equipment'
+  actuals.csv:7: give amount, or hours and rate for a labor entry
+[exit code 1]
+
+====================================================================================================
+# Write the static HTML report
+$ python -m jobcost report --data data/sample --out demo/report.html
+
+Wrote demo/report.html (7 jobs, 3 flagged)
+[exit code 0]
